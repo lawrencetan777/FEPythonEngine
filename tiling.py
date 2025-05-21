@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 import pytmx
 
-mapFile = "testmap.tmx"
+mapFile = "converted_map_csv.tmx"
 
 
 class Tile:
@@ -34,10 +34,20 @@ class Tilemap:
             for y in range(10):
                 self.image.blit(self.tileArray[y + self.yOffset][x + self.xOffset].image, (x * 16, y * 16))
 
-    def addOffsets(self, x,y):
+    def addOffsets(self, x, y):
 
         self.xOffset = self.xOffset + x
         self.yOffset = self.yOffset + y
+
+
+class Cursor:
+    def __init__(self):
+        self.x = 0
+        self.y = 5
+        self.image = pygame.image.load("pixil-frame-0.png")
+
+
+cursor = Cursor()
 
 
 class Game:
@@ -47,28 +57,52 @@ class Game:
         running = True
         tilemaptest.render()
         gamescreen.blit(tilemaptest.image, (0, 0))
+        gamescreen.blit(cursor.image, (cursor.x * 16, cursor.y * 16))
 
         while running:
+
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
 
+                # In the KEYDOWN event handler
                 if event.type == KEYDOWN:
                     if event.key == K_UP:
-                        if tilemaptest.yOffset > 0:
-                            tilemaptest.addOffsets(0, -1)
+                        if cursor.y > 0:
+                            if cursor.y > 2:
+                                cursor.y -= 1
+                            elif tilemaptest.yOffset > 0:
+                                tilemaptest.addOffsets(0, -1)
+                            else:
+                                cursor.y -= 1  # Allow cursor to move to edge if no more scrolling
                     elif event.key == K_DOWN:
-                        if tilemaptest.yOffset < tilemaptest.mapHeight - 10:
-                            tilemaptest.addOffsets(0, 1)
+                        if cursor.y < 9:
+                            if cursor.y < 7:
+                                cursor.y += 1
+                            elif tilemaptest.yOffset < tilemaptest.mapHeight - 10:
+                                tilemaptest.addOffsets(0, 1)
+                            else:
+                                cursor.y += 1  # Allow cursor to move to edge if no more scrolling
                     elif event.key == K_LEFT:
-                        if tilemaptest.xOffset > 0:
-                            tilemaptest.addOffsets(-1, 0)
+                        if cursor.x > 0:
+                            if cursor.x > 2:
+                                cursor.x -= 1
+                            elif tilemaptest.xOffset > 0:
+                                tilemaptest.addOffsets(-1, 0)
+                            else:
+                                cursor.x -= 1  # Allow cursor to move to edge if no more scrolling
                     elif event.key == K_RIGHT:
-                        if tilemaptest.xOffset < tilemaptest.mapWidth - 15:
-                            tilemaptest.addOffsets(1, 0)
+                        if cursor.x < 14:
+                            if cursor.x < 12:
+                                cursor.x += 1
+                            elif tilemaptest.xOffset < tilemaptest.mapWidth - 15:
+                                tilemaptest.addOffsets(1, 0)
+                            else:
+                                cursor.x += 1  # Allow cursor to move to edge if no more scrolling
 
                     tilemaptest.render()
                     gamescreen.blit(tilemaptest.image, (0, 0))
+                    gamescreen.blit(cursor.image, (cursor.x * 16, cursor.y * 16))
             pygame.display.flip()
 
 
