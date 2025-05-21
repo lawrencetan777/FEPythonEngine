@@ -1,0 +1,31 @@
+Class,MovementCSV
+Lord,CommonT1Movement.csv
+Cavalier,HorseT1Movement.csv
+Knight,CommonT1Movement.csv
+Thief,ThiefMovement.csv
+Mercenary,CommonT1Movement.csv
+Myrmidon,CommonT1Movement.csv
+Archer,CommonT1Movement.csv
+Wyvern Rider,FlyMovement.csv
+Mage,MagicMovement.csv
+Cleric,MagicMovement.csv
+Great Lord,CommonT2Movement.csv
+Paladin,HorseT2Movement.csv
+Great Knight,ArmorMovement.csv
+Assassin,ThiefMovement.csv
+Hero,FighterMovement.csv
+Swordmaster,CommonT2Movement.csv
+Sniper,CommonT2Movement.csv
+Ranger,CommonT2Movement.csv
+Wyvern Lord,FlyMovement.csv
+Mage Knight,HorseT1Movement.csv
+Bishop,MagicMovement.csv
+Nomad,CommonT1Movement.csv
+Nomad Trooper,HorseT1Movement.csv
+Druid,MagicMovement.csv
+Summoner,MagicMovement.csv
+Monk,MagicMovement.csv
+Rogue,ThiefMovement.csv
+Pupil,MagicMovement.csv
+Priest,MagicMovement.csv
+Shaman,MagicMovement.csv
